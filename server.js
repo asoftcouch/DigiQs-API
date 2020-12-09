@@ -3,8 +3,6 @@ const cors = require('cors');
 const { json } = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
-
 require('dotenv').config();
 
 const app = express();
@@ -20,9 +18,8 @@ connection.once('open', () => {
     console.log('MongoDB connection was successful');
 })
 
-app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-
+app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(cors());
 
 const InventarioRouter = require('./routes/Inventario');
