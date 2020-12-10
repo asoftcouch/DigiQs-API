@@ -3,30 +3,28 @@ const cors = require('cors');
 const { json } = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const InventoryRouter = require('./routes/Inventario');
+
 require('dotenv').config();
 
 const app = express();
 const port = '5000';
 
-const uri = process.env.CONNECTION_STRING;
-mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true} ); 
-
-
-const connection = mongoose.connection;
-
-connection.once('open', () => {
-    console.log('MongoDB connection was successful');
-})
-
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(bodyParser.json());
 app.use(cors());
+app.use('/Inventario/', InventoryRouter);
 
-const InventarioRouter = require('./routes/Inventario');
 
-app.use('/Inventario/', InventarioRouter);
+try{ 
 
-app.listen(port, () => {
-    console.log('Server is running on port: '+port);
-})
+    mongoose.connect(process.env.CONNECTION_STRING, {useNewUrlParser: true, useUnifiedTopology: true}, ()=> {
+        app.listen(port)
+        console.log('Connection to Database was successful and is listening at port: '+port)
+      }
+      );
+  }
+  catch (error) {
+    console.log(error);
+  }
 

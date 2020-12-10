@@ -8,31 +8,27 @@ router.route('/').get((req,res) => {
 })
 
 
-router.route('/add').post((req,res) => {
+router.route('/:id').get((req,res) => {
+    Inventory.findById(req.params.id)
+        .then(Inventory => res.json(Intenvory))
+        .catch(err => res.status(400).json('Error' + err));
+})
+
+router.route('/add').post((req,res) =>  {
 
     const name = req.body.name; 
     const quantity = req.body.quantity;
 
-    
-    console.log(name);
-
-    console.log(quantity);
-
-    
     const newInventory = new Inventory({
         name, 
         quantity
     });
 
-
     newInventory.save()
-    .then(() => res.json('Inventario nuevo'))
-    .catch(err => res.status(400).json('Error: '+ err));
+        .then(() => res.json('Inventario nuevo'))
+        .catch(err => res.status(400).json('Error: '+ err));
 });
 
 
-router.route('/example').get((req,res) => {
-    res.send('Hi');
-})
 
 module.exports = router; 
