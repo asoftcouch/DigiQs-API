@@ -10,7 +10,7 @@ router.route('/').get((req,res) => {
 
 router.route('/:id').get((req,res) => {
     Inventory.findById(req.params.id)
-        .then(Inventory => res.json(Intenvory))
+        .then(Inventory => res.json(Inventory))
         .catch(err => res.status(400).json('Error' + err));
 })
 
