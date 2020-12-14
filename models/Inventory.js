@@ -10,6 +10,12 @@ const InventorySchema = new Schema({
     },
     quantity: {
         type: String
+    },
+    price: {
+        type: String
+    },
+    category: {
+        type: String
     }
 });
 

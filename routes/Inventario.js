@@ -18,15 +18,27 @@ router.route('/add').post((req,res) =>  {
 
     const name = req.body.name; 
     const quantity = req.body.quantity;
+    const price = req.body.quantity;
+    const category = req.body.category;
 
-    const newInventory = new Inventory({
-        name, 
-        quantity
-    });
 
-    newInventory.save()
-        .then(() => res.json('Inventario nuevo'))
-        .catch(err => res.status(400).json('Error: '+ err));
+
+    if(name && quantity && price && category)  {
+
+        const newInventory = new Inventory({
+            name, 
+            quantity,
+            price,
+            category
+        });
+
+        newInventory.save()
+            .then(() => res.json('Inventario nuevo'))
+            .catch(err => res.status(400).json('Error: '+ err));
+    } 
+    else {
+        res.json('Error al guardar');
+    }
 });
 
 
