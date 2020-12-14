@@ -4,7 +4,8 @@ const { json } = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const InventoryRouter = require('./routes/Inventario');
-
+const ordersRouter = require('./routes/Orders');
+const clientsRouter = require('./routes/Clients');
 require('dotenv').config();
 
 const app = express();
@@ -14,7 +15,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use('/Inventario/', InventoryRouter);
-
+app.use('/Orders/', ordersRouter);
+app.use('/Clients/', clientsRouter);
 
 try{ 
 
