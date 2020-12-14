@@ -2,7 +2,7 @@ const router = require('express').Router();
 let Inventory = require('../models/Inventory');
 
 router.route('/').get((req,res) => {
-    Inventory.find()
+    Inventory.find().sort('added')
         .then(Inventorys => res.json(Inventorys))
         .catch(err => res.status(400).json('Error' + err));
 })
@@ -20,6 +20,12 @@ router.route('/add').post((req,res) =>  {
     const quantity = req.body.quantity;
     const price = req.body.quantity;
     const category = req.body.category;
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    const added = mm + '/' + dd + '/' + yyyy;
+
 
 
 
@@ -29,11 +35,12 @@ router.route('/add').post((req,res) =>  {
             name, 
             quantity,
             price,
-            category
+            category,
+            added
         });
 
         newInventory.save()
-            .then(() => res.json('Inventario nuevo'))
+            .then(() => res.json('Inventario nuevo ha sido creado'+added))
             .catch(err => res.status(400).json('Error: '+ err));
     } 
     else {

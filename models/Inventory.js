@@ -16,6 +16,9 @@ const InventorySchema = new Schema({
     },
     category: {
         type: String
+    },
+    added: {
+        type: Date
     }
 });
 
