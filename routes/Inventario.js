@@ -2,7 +2,7 @@ const router = require('express').Router();
 let Inventory = require('../models/Inventory');
 
 router.route('/').get((req,res) => {
-    Inventory.find().sort('added')
+    Inventory.find().sort({_id: -1})
         .then(Inventorys => res.json(Inventorys))
         .catch(err => res.status(400).json('Error' + err));
 })
