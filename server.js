@@ -24,11 +24,13 @@ app.use('/Data/', dataRouter);
 app.use('/Notifications/', notificationsRouter);
 app.use('/Categories/', categoriesRouter);
 
+const connectionString = 'mongodb+srv://DigiqsAdmin:CkGKM6TvBHP9GJV3@cluster0.b9g8e.mongodb.net/Digiqsdb?retryWrites=true&w=majority'; //Aqui poner el link con clave y direccion
+
 try{ 
 
-    mongoose.connect(process.env.CONNECTION_STRING, {useNewUrlParser: true, useUnifiedTopology: true}, ()=> {
+    mongoose.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true}, ()=> {
         app.listen(port)
-        console.log('Connection to Database was successful and is listening at port: '+port)
+        console.log('Conexion a la base de datos ha sido exitosa, server escuchando en el puerto: '+port)
       }
       );
   }
