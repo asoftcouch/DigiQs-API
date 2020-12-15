@@ -2,11 +2,7 @@ const router = require('express').Router();
 let Settings = require('../models/Settings');
 
 
-router.route('/newCategory').get((req,res) => {
-
-
-
-
+router.route('/').get((req,res) => {
 
     Settings.find()
         .then(Settings => res.json(Settings))
@@ -14,38 +10,31 @@ router.route('/newCategory').get((req,res) => {
 })
 
 
-router.route('/add').post((req,res) =>  {
+router.route('/addcategory').post((req,res) =>  {
 
-    // const name = req.body.name; 
-    // const quantity = req.body.quantity;
-    // const price = req.body.quantity;
-    // const category = req.body.category;
-    // var today = new Date();
-    // var dd = String(today.getDate()).padStart(2, '0');
-    // var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    // var yyyy = today.getFullYear();
-    // const added = mm + '/' + dd + '/' + yyyy;
+    const key = '5fd8240173b8fd49b066ac10'
+
+    var today = new Date();
+
+    var dd = String(today.getDate()).padStart(2, '0');
+
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //Enero is 0
+
+    var yyyy = today.getFullYear();
+
+    const lastUpdated = mm + '/' + dd + '/' + yyyy;
+
+    const categoryName = req.body.category;
+
+    try {
+    Settings.findByIdAndUpdate({_id: key}, { $push: {category: categoryName} }, {useFindAndModify: false})
+    res.json('Se ha actualizado categorias, '+categoryName);
+    } 
+    catch(err) {
+        res.json('Error: '+err);
+    }
 
 
-
-
-    // if(name && quantity && price && category)  {
-
-    //     const newInventory = new Inventory({
-    //         name, 
-    //         quantity,
-    //         price,
-    //         category,
-    //         added
-    //     });
-
-    //     newInventory.save()
-    //         .then(() => res.json('Inventario nuevo ha sido creado'+added))
-    //         .catch(err => res.status(400).json('Error: '+ err));
-    // } 
-    // else {
-    //     res.json('Error al guardar');
-    // }
 });
 
 
