@@ -25,13 +25,13 @@ const OrdersSchema = new Schema({
     status: {
         type: String
     },
-
-    random: {
+    clientId: {
         type: String
     },
-
-    Details: [orderDetailSchema],
-
+    Added: {
+        type: String
+    },
+    details: [orderDetailSchema],
     total: {
         type: String
     }

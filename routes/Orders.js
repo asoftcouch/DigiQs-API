@@ -16,13 +16,13 @@ router.route('/:id').get((req,res) => {
 
 router.route('/add').post((req,res) =>  {
 
-    const status = 'Pending';
+    const status = req.body.status;
     const total = req.body.total; 
-
+    const clientId = req.body.clientId; 
         const newOrder = new Orders({
             status: status,
             total: total,
-            random: 'Diciembre',
+            clientId: clientId,
             Details: []
             
         });
@@ -30,7 +30,7 @@ router.route('/add').post((req,res) =>  {
         if(!req.body.details == ''){
 
             req.body.details.forEach(element => {
-                newOrder.Details.push({
+                newOrder.details.push({
                     product: element.product,
                     price: element.price,
                     quantity: element.quantity,
