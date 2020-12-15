@@ -22,7 +22,7 @@ const connectionString = '' ;
 
 Al termina esto, solo hay que iniciar el servidor (server.js) utilizando el comando:
 
-```````bash
+```````node
 node server
 ``````````
 
