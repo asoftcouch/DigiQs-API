@@ -12,7 +12,7 @@ npm install body-parser cors dotenv express mongoose nodemon
 
 # Credenciales de MongoDB
 
-Agregar clave para acceder a la base de datos
+Agregar clave para acceder a la base de datos (se mantienen en un .env pero por proposito de prueba, solo ingresarla en la constante connectionString)
 
 `````````javascript
 const connectionString = '' ;
