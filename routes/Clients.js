@@ -1,6 +1,6 @@
 const router = require('express').Router();
 let Client = require('../models/Clients');
-
+const { createNotification } = require('../Methods/SendNotification');
 
 router.route('/').get((req,res) => {
     Client.find().sort({_id: -1})
@@ -32,6 +32,7 @@ router.route('/add').post((req, res) => {
     })
 
     try{
+        createNotification('Nuevo Cliente', 'Se ha agregado: '+companyName);
         newClient.save()
             .then(() => res.json('Nuevo cliento agregado'))
             .catch(err => res.status(400).json('Error'+ err));

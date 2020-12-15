@@ -1,6 +1,6 @@
 const router = require('express').Router();
 let Inventory = require('../models/Inventory');
-
+const { createNotification } = require('../Methods/SendNotification');
 router.route('/').get((req,res) => {
     Inventory.find().sort({_id: -1})
         .then(Inventorys => res.json(Inventorys))
@@ -18,7 +18,7 @@ router.route('/add').post((req,res) =>  {
 
     const name = req.body.name; 
     const quantity = req.body.quantity;
-    const price = req.body.quantity;
+    const price = req.body.price;
     const category = req.body.category;
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -39,6 +39,7 @@ router.route('/add').post((req,res) =>  {
             added
         });
 
+        createNotification('Nuevo Inventario', 'Se ha agregado: '+name);
         newInventory.save()
             .then(() => res.json('Inventario nuevo ha sido creado'+added))
             .catch(err => res.status(400).json('Error: '+ err));

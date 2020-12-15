@@ -29,6 +29,8 @@ router.route('/add').post((req,res) =>  {
 
         if(!req.body.details == ''){
 
+
+
             req.body.details.forEach(element => {
                 newOrder.details.push({
                     product: element.product,

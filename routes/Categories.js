@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { json } = require('body-parser');
 let Category = require('../models/Categories');
-
+const { createNotification } = require('../Methods/SendNotification');
 
 router.route('/').get((req,res) => {
 
@@ -23,16 +23,23 @@ router.route('/add').post((req,res) =>  {
     var yyyy = today.getFullYear();
     const added = mm + '/' + dd + '/' + yyyy;
 
+
+
+
     if(value){
         const newCategory = new Category({
             value: value,
             last_updated: added,
             description: description
         })
+
+            createNotification('Nueva Categoria', 'Se ha agregado: '+value);
+
             newCategory.save()
                 .then((response)=> res.json(response))
                 .catch((err) => res.json(error))
     }
+
 
 
 });
