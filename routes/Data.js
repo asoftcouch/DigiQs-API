@@ -2,6 +2,7 @@ const router = require('express').Router();
 let Inventory = require('../models/Inventory');
 let Clients = require('../models/Clients');
 let Orders = require('../models/Orders');
+
 const { ensureIndexes } = require('../models/Clients');
 
 
@@ -14,7 +15,9 @@ router.route('/orders').get( async (req,res) =>  {
     const pending = await Orders.countDocuments({status: 'pending'})
     const approved = await Orders.countDocuments({status: 'approved'})
     const declined = await Orders.countDocuments({status: 'declined'})
-    res.json( { pending: pending, approved: approved, declined: declined } );
+    const clients = await Clients.countDocuments();
+    const inventory = await Inventory.countDocuments();
+    res.json( { pending: pending, approved: approved, declined: declined, clients: clients, inventory: inventory } );
     } catch (err) {
         res.json(err);
     }

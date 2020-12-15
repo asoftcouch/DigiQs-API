@@ -8,7 +8,7 @@ const ordersRouter = require('./routes/Orders');
 const clientsRouter = require('./routes/Clients');
 const dataRouter = require('./routes/Data');
 const notificationsRouter = require('./routes/Notifications');
-const settingsRouter = require('./routes/Settings');
+const categoriesRouter = require('./routes/Categories');
 require('dotenv').config();
 
 const app = express();
@@ -22,7 +22,7 @@ app.use('/Orders/', ordersRouter);
 app.use('/Clients/', clientsRouter);
 app.use('/Data/', dataRouter);
 app.use('/Notifications/', notificationsRouter);
-app.use('/Settings/', settingsRouter);
+app.use('/Categories/', categoriesRouter);
 
 try{ 
 
