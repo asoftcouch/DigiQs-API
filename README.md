@@ -27,3 +27,11 @@ node server
 ``````````
 
 Una vez iniciado el servidor, la app digiqs en github-pages estara conectada. 
+
+# mongoDb
+
+Al haber hecho todos estos pasos correctamente, la consola tendra el mensaje: 
+
+```````bash
+Conexion a la base de datos ha sido exitosa, server escuchando en el puerto: 5000
+```````
