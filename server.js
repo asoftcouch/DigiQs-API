@@ -30,7 +30,7 @@ try{
 
     mongoose.connect(connectionString, {useNewUrlParser: true, useUnifiedTopology: true}, ()=> {
         app.listen(port)
-        console.log('Conexion a la base de datos ha sido exitosa, server escuchando en el puerto: '+port)
+        console.log('Conexion a la base de datos ha sido exitosa, server escuchando en el puerto:: '+port)
       }
       );
   }
